@@ -1,7 +1,8 @@
 import React from "react";
 import { Component } from "react";
 
-import HomePage from "./HomePage";
+import Council from "./OneCouncil";
+import BuildingType from "./TwoBuildingType";
 
 import data from "../../data/database.json";
 
@@ -44,13 +45,13 @@ export class FormBase extends Component {
 
   render() {
     const { step } = this.state;
-    const { council, lastName, email } = this.state;
-    const values = { council, lastName, email };
+    const { council } = this.state;
+    const values = { council };
 
     switch (step) {
       case 1:
         return (
-          <HomePage
+          <Council
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
@@ -58,7 +59,15 @@ export class FormBase extends Component {
           />
         );
       case 2:
-        return <h1>Step 2</h1>;
+        return (
+          <BuildingType
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChange={this.handleChange}
+            values={values}
+            data={data}
+          />
+        );
       case 3:
         return <h1>Step 3</h1>;
       case 4:

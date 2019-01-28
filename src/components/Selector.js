@@ -15,12 +15,19 @@ var selectWidth = {
 export class Selector extends Component {
   state = {
     council: "",
-    open: false
+    open: false,
+    buildingTypes: []
   };
 
   selectChange = event => {
-    console.log(event.target);
-    this.setState({ [event.target.name]: event.target.value });
+    // console.log(event.target);
+    console.log(event.target.value);
+    for (var i = 0; i < event.target.value.length; i++) {
+      console.log(event.target.value[i]);
+    }
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   selectClose = () => {
@@ -32,9 +39,7 @@ export class Selector extends Component {
   };
 
   render() {
-    const { data, list } = this.props;
-
-    // console.log(list);
+    const { data } = this.props;
 
     const listMaker = data.map(name => {
       // console.log(name.id);
@@ -48,6 +53,8 @@ export class Selector extends Component {
         </MenuItem>
       );
     });
+
+    // console.log(this.state)
 
     return (
       <MuiThemeProvider>

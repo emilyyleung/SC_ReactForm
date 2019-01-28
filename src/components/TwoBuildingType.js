@@ -10,29 +10,47 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import Selector from "./Selector";
-
 var selectWidth = {
   minWidth: "150px",
   margin: "10px"
 };
 
-export class HomePage extends Component {
+export class BuildingType extends Component {
   state = {
-    council: "",
+    buildingType: "",
     open: false
   };
 
-  selectChange = event => {
-    console.log(event.target);
-    this.setState({ [event.target.name]: event.target.value });
+  continue = e => {
+    e.preventDefault();
+    this.props.nextStep();
   };
 
-  selectClose = () => {
+  back = e => {
+    e.preventDefault();
+    this.props.prevStep();
+  };
+
+  selectChange = event => {
+    // console.log(event.target);
+    console.log(event.target.name);
+    console.log(event.target.value);
+    // for (var property in event.target.value) {
+    //   buildings.push(property)
+    //   this.setState({
+    //     buildingTypes: buildings
+    //   })
+    // }
+    this.setState({ council: event.target.value }, () => {
+      console.log("hello");
+    });
+  };
+
+  selectClose = event => {
     this.setState({ open: false });
   };
 
-  selectOpen = () => {
+  selectOpen = event => {
     this.setState({ open: true });
   };
 
@@ -52,31 +70,35 @@ export class HomePage extends Component {
       );
     });
 
-    const selectBuildingType = data.map(building => {
-      // console.log(building.id);
-      return (
-        <MenuItem key={building.id} value={building.council}>
-          {building.council}
-        </MenuItem>
-      );
-    });
+    console.log(this.props);
 
     return (
       <MuiThemeProvider>
         <React.Fragment>
-          <AppBar title="Home Page" />
+          <AppBar title="Building Type" />
           <TextField
-            hintText={"Enter council"}
-            floatingLabelText=" Council"
-            onChange={handleChange("council")}
+            hintText={"Enter Building Type"}
+            floatingLabelText=" Building Type"
+            onChange={handleChange("buildingType")}
             defaultValue={values.council}
           />
           <br />
-          <RaisedButton label="Continue" primary={true} style={styles.button} />
+          <RaisedButton
+            label="Continue"
+            primary={true}
+            style={styles.button}
+            onClick={this.continue}
+          />
+          <RaisedButton
+            label="Back"
+            primary={false}
+            style={styles.button}
+            onClick={this.back}
+          />
           <hr />
           <ul>{councilList}</ul>
           <hr />
-          <FormControl style={selectWidth}>
+          <FormControl style={selectWidth} required>
             <InputLabel htmlFor="demo-controlled-open-select">
               Council
             </InputLabel>
@@ -84,18 +106,16 @@ export class HomePage extends Component {
               open={this.state.open}
               onClose={this.selectClose}
               onOpen={this.selectOpen}
-              value={this.state.council}
               onChange={this.selectChange}
+              value={this.state.council}
               inputProps={{
                 name: "council",
-                id: "demo-controlled-open-select"
+                id: "age-native-required"
               }}
             >
               {selectCouncil}
             </Select>
           </FormControl>
-
-          <Selector data={data} list={data.name} />
         </React.Fragment>
       </MuiThemeProvider>
     );
@@ -108,4 +128,4 @@ const styles = {
   }
 };
 
-export default HomePage;
+export default BuildingType;
