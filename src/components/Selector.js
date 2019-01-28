@@ -2,22 +2,17 @@ import React from "react";
 import { Component } from "react";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-
-import Selector from "./Selector";
 
 var selectWidth = {
   minWidth: "150px",
   margin: "10px"
 };
 
-export class HomePage extends Component {
+export class Selector extends Component {
   state = {
     council: "",
     open: false
@@ -37,26 +32,19 @@ export class HomePage extends Component {
   };
 
   render() {
-    const { values, handleChange, data } = this.props;
+    const { data, list } = this.props;
 
-    const councilList = data.map(name => {
+    // console.log(list);
+
+    const listMaker = data.map(name => {
       // console.log(name.id);
       return <li key={name.id}>{name.council}</li>;
     });
 
-    const selectCouncil = data.map(name => {
+    const selectOption = data.map(name => {
       return (
-        <MenuItem key={name.id} value={name.council}>
+        <MenuItem key={name.id} value={name.buildingTypes}>
           {name.council}
-        </MenuItem>
-      );
-    });
-
-    const selectBuildingType = data.map(building => {
-      // console.log(building.id);
-      return (
-        <MenuItem key={building.id} value={building.council}>
-          {building.council}
         </MenuItem>
       );
     });
@@ -64,18 +52,6 @@ export class HomePage extends Component {
     return (
       <MuiThemeProvider>
         <React.Fragment>
-          <AppBar title="Home Page" />
-          <TextField
-            hintText={"Enter council"}
-            floatingLabelText=" Council"
-            onChange={handleChange("council")}
-            defaultValue={values.council}
-          />
-          <br />
-          <RaisedButton label="Continue" primary={true} style={styles.button} />
-          <hr />
-          <ul>{councilList}</ul>
-          <hr />
           <FormControl style={selectWidth}>
             <InputLabel htmlFor="demo-controlled-open-select">
               Council
@@ -91,21 +67,14 @@ export class HomePage extends Component {
                 id: "demo-controlled-open-select"
               }}
             >
-              {selectCouncil}
+              {selectOption}
             </Select>
           </FormControl>
-
-          <Selector data={data} list={data.name} />
+          {listMaker}
         </React.Fragment>
       </MuiThemeProvider>
     );
   }
 }
 
-const styles = {
-  button: {
-    margin: 5
-  }
-};
-
-export default HomePage;
+export default Selector;
