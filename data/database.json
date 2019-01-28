@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "council": "parramatta",
+    "buildingTypes": {
+      "house1": {},
+      "house2": {},
+      "house3": {}
+    }
+  },
+  {
+    "id": 2,
+    "council": "sydney",
+    "buildingTypes": {
+      "house4": {},
+      "house5": {},
+      "house6": {}
+    }
+  },
+  {
+    "id": 3,
+    "council": "north sydney",
+    "buildingTypes": {
+      "house7": {},
+      "house8": {},
+      "house9": {}
+    }
+  },
+  {
+    "id": 4,
+    "council": "liverpool",
+    "buildingTypes": {
+      "house10": {},
+      "house11": {},
+      "house12": {}
+    }
+  }
+]
